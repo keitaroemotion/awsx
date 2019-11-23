@@ -34,7 +34,7 @@ for line in contraptions_split:
     i = i + 1
 
 print      
-print       "NAME\tSECURITY GROUPS ID\tSECURITY GROUP NAME"
+print       "NAME\tSECURITY GROUPS ID\tSECURITY GROUPS NAME"
 for result in results:  
     print(result)
 print      
