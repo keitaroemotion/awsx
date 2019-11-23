@@ -28,7 +28,6 @@ if len(target_groups) == 0:
     print("\ntarget groups matching the query '{}' is zero.".format(query_words))
     sys.exit()
 
-
 print("\nYour security group details\n")
 for target_group in target_groups: 
     sg_id = target_group.split("\t")[1]

@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+
+import os
+import re
+import sys
+
+args = sys.argv[1:]   
+
+def pick(args, index, message):
+    if len(args) <= index:
+        print("{} is missing".format(message))
+        print("you need to type as the following:\n")
+        print("AddSgRule [sg name] [tcp/udp/ssh] [port] [x.x.x.x/x]")
+        sys.exit()
+
+    return args[index]
+
+group_name = pick(args, 0, "group name")
+protocol   = pick(args, 1, "protocol")
+port       = pick(args, 2, "port")
+cidr       = pick(args, 3, "cidr")
+        
+aws_app_root_dir = "~/.vim/aws.vim/"
+security_groups = os\
+                      .popen(
+                          aws_app_root_dir + "list-security-groups"
+                      )\
+                      .read()\
+                      .split('\n')
+
+security_groups = [
+                      x
+                      for x
+                      in security_groups 
+                      if x != "" and not "NAME" in x
+                  ]
+
+target_groups = [x for x in security_groups if group_name in x]
+
+if len(target_groups) == 0:
+    print("\ntarget groups matching the query '{}' is zero.".format(query_words))
+    sys.exit()
+
+for target_group in target_groups: 
+    name, sg_id, sg_name = target_group.split("\t")
+    cmd = "aws ec2 authorize-security-group-ingress --group-id {} --protocol {} --port {} --cidr {}".format(sg_id, protocol, port, cidr)
+    print(cmd)
+    res = os.popen(cmd)
+    print(res)
+#    :Execute "mama piano" tcp 22 0.0.0.0/0
