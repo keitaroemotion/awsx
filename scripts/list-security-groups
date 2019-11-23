@@ -38,4 +38,3 @@ print       "NAME\tSECURITY GROUPS ID\tSECURITY GROUPS NAME"
 for result in results:  
     print(result)
 print      
-

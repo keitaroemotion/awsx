@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+aws_dir=~/.vim/aws.vim
+mkdir -p $aws_dir
+
+cp -r scripts/* $aws_dir
