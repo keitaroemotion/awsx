@@ -10,7 +10,7 @@ def pick(args, index, message):
     if len(args) <= index:
         print("{} is missing".format(message))
         print("you need to type as the following:\n")
-        print("AddSgRule [sg name] [tcp/udp/ssh] [port] [x.x.x.x/x]")
+        print("AddSgRule [sg name] [tcp/udp] [port] [x.x.x.x/x]")
         sys.exit()
 
     return args[index]
@@ -47,4 +47,5 @@ for target_group in target_groups:
     print(cmd)
     res = os.popen(cmd)
     print(res)
+
 #    :Execute "mama piano" tcp 22 0.0.0.0/0
